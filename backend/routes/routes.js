@@ -1,0 +1,22 @@
+const express = require ("express")
+const router = express.Router()
+const { getAll,
+        getOne,
+        post,
+        patchOne,
+        deleteOne}
+ = require ("../controllers/controllers")
+
+router.get("/", getAll)
+
+router.get("/:id", getOne)
+
+router.post("/", post)
+
+router.patch("/:id", patchOne)
+
+router.delete("/:id", deleteOne)
+
+
+
+module.exports = router;

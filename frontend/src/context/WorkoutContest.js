@@ -16,7 +16,7 @@ export const WorkoutContext = createContext()
 
         case "Delete_Item":
             return {
-                workouts: state.workouts.filter(workout => workout._id !== action.payload._id) 
+                workouts: state.workouts.filter((workout) => workout._id !== action.payload._id) 
             }
         default:
             return state

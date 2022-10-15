@@ -78,7 +78,7 @@ const deleteOne = async function(req, res) {
         return res.status(404).json({mess: "Not Found" })
     }
 
-    res.status(200).json({workout})
+    res.status(200).json(workout)
 }
 
 

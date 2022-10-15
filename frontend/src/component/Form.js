@@ -1,8 +1,9 @@
 import { useState } from "react";
+import { useWorkoutHook } from "../hooks/useWorkoutHook";
 
 const Form = function() {
 
-    
+    const { dispatch } = useWorkoutHook()
     const [ title, setTitle ] = useState("")
     const [ loads, setLoads ] = useState("")
     const [ reps, setReps ] = useState("")
@@ -33,7 +34,8 @@ const Form = function() {
         setTitle("")
         setLoads("")
         setReps("")
-        setError(null)        
+        setError(null)
+        dispatch({ type: "Create_Workouts", payload: json })
     }
 }
 

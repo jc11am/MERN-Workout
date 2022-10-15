@@ -36,6 +36,25 @@ const post = async function(req, res) {
 
     const { title, reps, loads } = req.body
 
+    let emptyFields = []
+
+    if(!title){
+        emptyFields.push("title") 
+    }
+
+    if(!reps){
+        emptyFields.push("reps") 
+    }
+
+    if(!loads){
+        emptyFields.push("loads") 
+    }
+
+    if(emptyFields.length > 0){
+       return res.status(400).json({ error: "Fields are empty", emptyFields })
+    }
+
+
     try {
         const workout = await Workout.create( {title, reps, loads} )
         res.status(200).json(workout)

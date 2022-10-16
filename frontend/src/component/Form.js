@@ -43,7 +43,10 @@ const Form = function() {
 }
 
     return(
+
         <form className="create" onSubmit={submitForm}>
+        <h3>Add a New Workout</h3>
+
             <label>Title:</label>
             <input type="text"
             onChange={(e)=>{

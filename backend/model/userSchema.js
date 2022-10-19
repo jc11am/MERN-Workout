@@ -15,6 +15,8 @@ const userSchema = mongoose.Schema({
     }
 })
 
+
+// signup
 userSchema.statics.signup = async function( email, password ) {
 
     //validation
@@ -43,6 +45,29 @@ userSchema.statics.signup = async function( email, password ) {
 
     return user
 }
+
+// login
+userSchema.statics.login = async function( email, password ) {
+    // check fields
+    if(!email || !password) {
+        throw Error ("All fields are required")
+    }
+
+    const user = await this.findOne( {email} )
+
+    if(!user) {
+        throw Error ("Incorrect Email")
+    }
+
+    const match = await bcrypt.compare(password, user.password)
+
+    if(!match) {
+        throw Error ("Password Incorrect")
+    }
+
+    return user
+    }
+
 
 const User = mongoose.model("User", userSchema)
 

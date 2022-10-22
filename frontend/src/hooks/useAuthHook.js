@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import {AuthContest} from "../context/AuthContest"
 
-export const AuthHook = function(){
+export const useAuthHook = function(){
     const AuthValue = useContext(AuthContest)
 
     if(!AuthValue){

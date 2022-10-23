@@ -1,38 +1,18 @@
-import { useAuthHook } from "../hooks/useAuthHook";
 import { useState } from "react";
+import { useLoginHook } from "../hooks/useLoginHook"
 
 const LogIn= function() {
-    const { dispatch } = useAuthHook()
+    const { login, isloading, error } = useLoginHook()
 
     const [ email, setEmail ] = useState("")
     const [ password, setPassword ] = useState("")
-    const [ error, setError ] = useState(null)
 
     const logInSubmit = async function (e){
         e.preventDefault()
 
-        const signing = { email, password }
 
-        const response = await fetch("/api/login", {
-            method: "POST",
-            body: JSON.stringify(signing),
-            headers:  {
-                "Content-Type": "application/json"
-            }
-        }
-        )
-        const json = await response.json()
-
-        if(!response){
-           setError( json.message ) 
-        }
-
-        if(response){
-            setError(null)
-            setEmail("")
-            setPassword("")
-            dispatch({ type: "LogIn", payload: json })
-        }
+        await login(email, password)
+        
     }
 
 
@@ -56,7 +36,7 @@ const LogIn= function() {
                 }}
                 value={password}
              />
-             <button>LogIn</button>
+             <button disabled={isloading}>LogIn</button>
              { error && <p>{error}</p> }
         </form>
 

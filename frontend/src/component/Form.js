@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useWorkoutHook } from "../hooks/useWorkoutHook";
+import { useAuthHook } from "../hooks/useAuthHook"
 
 const Form = function() {
+    const { user } = useAuthHook()
 
     const { dispatch } = useWorkoutHook()
     const [ title, setTitle ] = useState("")
@@ -14,13 +16,19 @@ const Form = function() {
  const submitForm = async function(e) {
     e.preventDefault()
 
+    if(!user) {
+        setError("Not Authenticated")
+        return
+    }
+
     const newWorkout = { title, loads, reps }
 
     const response = await fetch("/api/workouts", {
         method: "POST",
         body: JSON.stringify(newWorkout),
         headers:  {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${user.token}`
         }
     })
 

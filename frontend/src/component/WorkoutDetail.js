@@ -1,15 +1,23 @@
 import { useWorkoutHook } from "../hooks/useWorkoutHook"
+import { useAuthHook } from "../hooks/useAuthHook"
 
 //date fns
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
 
 const WorkoutDetail = function({ workout }) {
     const { dispatch } = useWorkoutHook() 
+    const { user } = useAuthHook()
 
 
     const handleDelete = async function() {
+
+        if(!user) {
+            return
+        }
+
         const response = await fetch("/api/workouts/" + workout._id, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: { "Authorization": `Bearer ${user.token}`}
         })
         const json = await response.json()
 

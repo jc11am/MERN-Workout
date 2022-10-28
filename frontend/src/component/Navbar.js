@@ -19,6 +19,7 @@ const Navbar = function() {
                 </Link>
                 <nav>
                 { user && <div>
+                    <span>{user.email}</span>
                     <button onClick={ logoutUser } >Log Out</button>
                 </div>}
 

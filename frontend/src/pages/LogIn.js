@@ -30,7 +30,7 @@ const LogIn= function() {
              />
 
             <label>Password:</label>
-            <input type="text"
+            <input type="password"
                 onChange={function (e){
                     setPassword(e.target.value)
                 }}

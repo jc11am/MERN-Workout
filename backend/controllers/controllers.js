@@ -3,8 +3,9 @@ const mongoose = require ("mongoose")
 
 
 const getAll = async function(req, res) {
+    const user_id = req.user._id
 
-    const workouts = await Workout.find({})
+    const workouts = await Workout.find({ user_id })
 
     if(!workouts){
        return res.status(404).json({mess: "Not Found"})
@@ -33,6 +34,7 @@ const getOne = async function(req, res) {
 
 // Post request
 const post = async function(req, res) {
+    const user_id = req.user._id
 
     const { title, reps, loads } = req.body
 
@@ -56,7 +58,7 @@ const post = async function(req, res) {
 
 
     try {
-        const workout = await Workout.create( {title, reps, loads} )
+        const workout = await Workout.create( {title, reps, loads, user_id} )
         res.status(200).json(workout)
     } catch (error) {
         res.status(400).json({error: error.message})

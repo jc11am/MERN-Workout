@@ -12,7 +12,7 @@ export const useSignUpHook = function() {
         setIsLoading(true)
         setError(null)
 
-        const response = await fetch("/api/user/signup", {
+        const response = await fetch("https://mernworkoutss.herokuapp.com/api/user/signup", {
             method: "POST",
             body: JSON.stringify({ email, password }),
             headers:  {

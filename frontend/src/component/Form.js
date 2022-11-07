@@ -23,7 +23,7 @@ const Form = function() {
 
     const newWorkout = { title, loads, reps }
 
-    const response = await fetch("/api/workouts", {
+    const response = await fetch("https://mernworkoutss.herokuapp.com/api/workouts", {
         method: "POST",
         body: JSON.stringify(newWorkout),
         headers:  {
